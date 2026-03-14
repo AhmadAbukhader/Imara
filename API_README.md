@@ -56,10 +56,10 @@ Company (tenant root)
 
 | Module                  | Base Path                                                           | Status  |
 | ----------------------- | ------------------------------------------------------------------- | ------- |
-| Auth                    | `/api/auth`                                                         | Partial |
-| Companies               | `/api/companies`                                                    | Pending |
+| Auth                    | `/api/auth`                                                         | Done ✓  |
+| Companies               | `/api/companies`                                                    | Done ✓  |
 | Users                   | `/api/companies/{companyId}/users`                                  | Pending |
-| Buildings               | `/api/companies/{companyId}/buildings`                              | Pending |
+| Buildings               | `/api/companies/{companyId}/buildings`                              | Done ✓  |
 | Apartments              | `/api/companies/{companyId}/buildings/{buildingId}/apartments`      | Pending |
 | Service Types           | `/api/companies/{companyId}/service-types`                          | Pending |
 | Building Service Types  | `/api/companies/{companyId}/buildings/{buildingId}/service-types`   | Pending |
@@ -80,10 +80,10 @@ Company (tenant root)
 
 | Method | Endpoint         | Description                                                          | Status  |
 | ------ | ---------------- | -------------------------------------------------------------------- | ------- |
-| POST   | `/login`         | Login with email + password, returns JWT                             | Done    |
-| GET    | `/me`            | Get current user info (requires auth)                                | Done    |
-| POST   | `/register`      | Sign up: create company + first user (COMPANY_OWNER)                 | Pending |
-| POST   | `/register/join` | Apartment owner joins existing company (invite link or company code) | Pending |
+| POST   | `/login`         | Login with email + password, returns JWT                             | Done ✓  |
+| GET    | `/me`            | Get current user info (requires auth)                                | Done ✓  |
+| POST   | `/register`      | Sign up: create company + first user (COMPANY_OWNER)                 | Done ✓  |
+| POST   | `/register/join` | Apartment owner joins existing company (invite link or company code) | Done ✓  |
 
 
 **Register (company):** Create company + first user atomically. Request: `companyName`, `companyEmail`, `companyPhone`, `fullName`, `email`, `password`.
@@ -100,9 +100,9 @@ Company (tenant root)
 
 | Method | Endpoint       | Description                                                  | Status  |
 | ------ | -------------- | ------------------------------------------------------------ | ------- |
-| GET    | `/`            | List companies (filtered by user's company or all for admin) | Pending |
-| GET    | `/{companyId}` | Get company by ID                                            | Pending |
-| PUT    | `/{companyId}` | Update company                                               | Pending |
+| GET    | `/`            | List companies (filtered by user's company or all for admin) | Done ✓  |
+| GET    | `/{companyId}` | Get company by ID                                            | Done ✓  |
+| PUT    | `/{companyId}` | Update company                                               | Done ✓  |
 
 
 **Note:** Company creation is via `/api/auth/register`. No separate POST for companies unless admin onboarding is needed.
@@ -135,11 +135,11 @@ Company (tenant root)
 
 | Method | Endpoint        | Description                       | Status  |
 | ------ | --------------- | --------------------------------- | ------- |
-| GET    | `/`             | List buildings in company         | Pending |
-| GET    | `/{buildingId}` | Get building by ID                | Pending |
-| POST   | `/`             | Create building                   | Pending |
-| PUT    | `/{buildingId}` | Update building                   | Pending |
-| DELETE | `/{buildingId}` | Delete (or soft-disable) building | Pending |
+| GET    | `/`             | List buildings in company         | Done ✓  |
+| GET    | `/{buildingId}` | Get building by ID                | Done ✓  |
+| POST   | `/`             | Create building                   | Done ✓  |
+| PUT    | `/{buildingId}` | Update building                   | Done ✓  |
+| DELETE | `/{buildingId}` | Delete (or soft-disable) building | Done ✓  |
 
 
 ---
@@ -273,16 +273,16 @@ Use this to track progress. Check off when done.
 
 ### Phase 1: Auth & Company Setup
 
-- `POST /api/auth/register` – create company + first COMPANY_OWNER user
-- `POST /api/auth/register/join` – user joins existing company (basic info only, apartment stays null)
-- Add `permitAll` for `/api/auth/register` and `/api/auth/register/join` in SecurityConfig
-- Create `RegisterRequest` DTO (company flow), `JoinCompanyRequest` DTO (apartment owner flow – no apartment info), `register()` and `joinCompany()` in IAuthService
-- User verification: COMPANY_OWNER sends verification email to user
-- COMPANY_OWNER assigns apartment (UserApartment) after verification
+- [x] `POST /api/auth/register` – create company + first COMPANY_OWNER user
+- [x] `POST /api/auth/register/join` – user joins existing company (basic info only, apartment stays null)
+- [x] Add `permitAll` for `/api/auth/register` and `/api/auth/register/join` in SecurityConfig
+- [x] Create `RegisterRequest` DTO (company flow), `JoinCompanyRequest` DTO (apartment owner flow – no apartment info), `register()` and `joinCompany()` in IAuthService
+- [ ] User verification: COMPANY_OWNER sends verification email to user
+- [ ] COMPANY_OWNER assigns apartment (UserApartment) after verification
 
 ### Phase 2: Core CRUD (Company-scoped)
 
-- Companies: GET `/{id}`, PUT `/{id}`
+- [x] Companies: GET `/`, GET `/{id}`, PUT `/{id}`
 - Users: full CRUD
 - Buildings: full CRUD
 - Apartments: full CRUD

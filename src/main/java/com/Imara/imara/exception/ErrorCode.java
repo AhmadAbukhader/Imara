@@ -12,6 +12,9 @@ public enum ErrorCode {
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "Authentication required"),
     INVALID_CREDENTIALS(HttpStatus.UNAUTHORIZED, "Invalid email or password"),
 
+    // 403 Forbidden
+    FORBIDDEN(HttpStatus.FORBIDDEN, "Access denied"),
+
     // 404 Not Found
     COMPANY_NOT_FOUND(HttpStatus.NOT_FOUND, "Company not found"),
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "User not found"),
